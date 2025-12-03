@@ -208,6 +208,7 @@ unittest (AvrogencppTests)
 unittest (CompilerTests)
 unittest (AvrogencppTestReservedWords)
 unittest (CommonsSchemasTests)
+unittest (NameValidationTests)
 
 add_dependencies (AvrogencppTestReservedWords cpp_reserved_words_hh)
 
