@@ -234,14 +234,11 @@ init_unit_test_suite(int /*argc*/, char * /*argv*/[]) {
     
     // JSON compilation validation tests
     ts->add(BOOST_TEST_CASE(&testValidSchemaNameFromJson));
-    // Disabled because this will incorrectly fail with the current code
-    // ts->add(BOOST_TEST_CASE(&testInvalidSchemaNameFromJson));
+    ts->add(BOOST_TEST_CASE(&testInvalidSchemaNameFromJson));
     ts->add(BOOST_TEST_CASE(&testValidFieldNamesFromJson));
-    // Disabled because this will incorrectly fail with the current code
-    // ts->add(BOOST_TEST_CASE(&testInvalidFieldNamesFromJson));
+    ts->add(BOOST_TEST_CASE(&testInvalidFieldNamesFromJson));
     ts->add(BOOST_TEST_CASE(&testValidEnumSymbolsFromJson));
-    // Disabled because this will incorrectly fail with the current code
-    // ts->add(BOOST_TEST_CASE(&testInvalidEnumSymbolsFromJson));
+    ts->add(BOOST_TEST_CASE(&testInvalidEnumSymbolsFromJson));
     
     return ts;
 }
