@@ -39,6 +39,9 @@ class GenericDatum;
 
 using NodePtr = std::shared_ptr<Node>;
 
+// Name validation function used by Name::check() and field/symbol validation
+void validateSimpleName(const std::string &name);
+
 class AVRO_DECL Name {
     struct Aliases;
 

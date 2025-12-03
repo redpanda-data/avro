@@ -101,22 +101,48 @@ bool Name::operator<(const Name &n) const {
     return (ns_ < n.ns_) || (!(n.ns_ < ns_) && (simpleName_ < n.simpleName_));
 }
 
-static bool invalidChar1(char c) {
-    return !isalnum(c) && c != '_' && c != '.' && c != '$';
+// Locale-independent ASCII alphabetic check
+static constexpr bool is_alpha_ascii(char c) {
+    return (c >= 'A' && c <= 'Z') ||
+           (c >= 'a' && c <= 'z');
 }
 
-static bool invalidChar2(char c) {
-    return !isalnum(c) && c != '_';
+// Locale-independent ASCII alphanumeric check
+static constexpr bool is_alnum_ascii(char c) {
+    return is_alpha_ascii(c) || (c >= '0' && c <= '9');
+}
+
+static constexpr bool invalidChar1(char c) {
+    return !is_alnum_ascii(c) && c != '_' && c != '.' && c != '$';
+}
+
+// Checks that `name` is a "simple" identifier:
+//   - first char: [A-Za-z_]
+//   - rest:       [A-Za-z0-9_]
+void validateSimpleName(const std::string &name) {
+    if (name.empty()) {
+        throw Exception("Name cannot be empty");
+    }
+    
+    char first = name[0];
+    if (!(is_alpha_ascii(first) || first == '_')) {
+        throw Exception("Illegal initial character in name: " + name);
+    }
+    
+    for (size_t i = 1; i < name.length(); i++) {
+        char c = name[i];
+        if (!(is_alnum_ascii(c) || c == '_')) {
+            throw Exception("Illegal character in name: " + name);
+        }
+    }
 }
 
 void Name::check() const {
     if (!ns_.empty() && (ns_[0] == '.' || ns_[ns_.size() - 1] == '.' || std::find_if(ns_.begin(), ns_.end(), invalidChar1) != ns_.end())) {
         throw Exception("Invalid namespace: " + ns_);
     }
-    if (simpleName_.empty()
-        || std::find_if(simpleName_.begin(), simpleName_.end(), invalidChar2) != simpleName_.end()) {
-        throw Exception("Invalid name: " + simpleName_);
-    }
+
+    validateSimpleName(simpleName_);
 }
 
 bool Name::operator==(const Name &n) const {

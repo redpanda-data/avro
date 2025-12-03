@@ -33,6 +33,7 @@ static const std::vector<std::string> invalidSimpleNames = {
     "invalid name",  // contains space
     "invalid-name",  // contains hyphen
     "invalid.name",  // contains period
+    "invalid.namé",  // contains non-ASCII character
     ""               // empty name
 };
 
@@ -49,6 +50,7 @@ static const std::vector<std::string> invalidSchemaNames = {
     "Invalid Name", // contains space
     "Invalid-Name", // contains hyphen
     "com.example.1Invalid", // invalid full name
+    "Invalid-Namé", // contains non-ASCII character
     "" // empty name
 };
 
@@ -110,15 +112,12 @@ init_unit_test_suite(int /*argc*/, char * /*argv*/[]) {
 
     auto *ts = BOOST_TEST_SUITE("Avro C++ name validation tests");
     ts->add(BOOST_TEST_CASE(&testValidSchemaNames));
-    // Disabled because this will incorrectly fail with the current code
-    // ts->add(BOOST_TEST_CASE(&testInvalidSchemaNames));
+    ts->add(BOOST_TEST_CASE(&testInvalidSchemaNames));
     
     ts->add(BOOST_TEST_CASE(&testValidFieldNames));
-    // Disabled because this will incorrectly fail with the current code
-    // ts->add(BOOST_TEST_CASE(&testInvalidFieldNames));
+    ts->add(BOOST_TEST_CASE(&testInvalidFieldNames));
 
     ts->add(BOOST_TEST_CASE(&testValidEnumSymbols));
-    // Disabled because this will incorrectly fail with the current code
-    // ts->add(BOOST_TEST_CASE(&testInvalidEnumSymbols));
+    ts->add(BOOST_TEST_CASE(&testInvalidEnumSymbols));
     return ts;
 }
