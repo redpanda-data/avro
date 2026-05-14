@@ -17,9 +17,6 @@
  */
 
 #include <cctype>
-#ifndef _WIN32
-#include <ctime>
-#endif
 #include <fstream>
 #include <iostream>
 #include <map>
@@ -30,7 +27,6 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/program_options.hpp>
 
-#include <boost/random/mersenne_twister.hpp>
 #include <utility>
 
 #include "Compiler.hh"
@@ -92,7 +88,6 @@ class CodeGen {
     const std::string includePrefix_;
     const bool noUnion_;
     const std::string guardString_;
-    boost::mt19937 random_;
 
     vector<PendingSetterGetter> pendingGettersAndSetters;
     vector<PendingConstructor> pendingConstructors;
@@ -123,8 +118,7 @@ public:
             std::string includePrefix, bool noUnion) : unionTracker_(schemaFile), os_(os), inNamespace_(false), ns_(std::move(ns)),
                                                        schemaFile_(std::move(schemaFile)), headerFile_(std::move(headerFile)),
                                                        includePrefix_(std::move(includePrefix)), noUnion_(noUnion),
-                                                       guardString_(std::move(guardString)),
-                                                       random_(static_cast<uint32_t>(::time(nullptr))) {
+                                                       guardString_(std::move(guardString)) {
     }
 
     void generate(const ValidSchema &schema);
