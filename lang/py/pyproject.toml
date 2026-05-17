@@ -17,7 +17,7 @@
 # Minimal pip build requirements:
 # https://pip.pypa.io/en/stable/reference/pip/#pep-517-and-518-support
 [build-system]
-requires = ["setuptools>=40.8.0", "wheel"]
+requires = ["setuptools>=82.0.1", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.black]
