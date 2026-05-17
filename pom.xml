@@ -52,7 +52,7 @@
     <checkstyle.version>10.17.0</checkstyle.version>
     <enforcer-plugin.version>3.5.0</enforcer-plugin.version>
     <extra-enforcer-rules.version>1.8.0</extra-enforcer-rules.version>
-    <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
+    <maven-antrun-plugin.version>3.2.0</maven-antrun-plugin.version>
     <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
     <maven-gpg-plugin.version>3.2.4</maven-gpg-plugin.version>
     <maven-javadoc-plugin.version>3.8.0</maven-javadoc-plugin.version>
