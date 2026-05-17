@@ -107,7 +107,7 @@ jobs:
           maven-version: 3.9.6
 
       - name: 'Setup Python for Generating Input Data'
-        uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
 
       - name: 'Apt Install Compression Libs Required by Python'
         run: |
