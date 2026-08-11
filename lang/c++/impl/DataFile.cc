@@ -31,7 +31,7 @@
 #include <boost/random/mersenne_twister.hpp>
 
 #ifdef SNAPPY_CODEC_AVAILABLE
-#include <snappy.h>
+#include "snappy.h"
 #endif
 
 namespace avro {
