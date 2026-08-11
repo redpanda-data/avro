@@ -17,6 +17,7 @@
  */
 
 #include "Stream.hh"
+#include <iterator>
 #include <vector>
 
 namespace avro {
