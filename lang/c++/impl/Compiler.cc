@@ -293,6 +293,7 @@ static void getCustomAttributes(const Object &m, CustomAttributes &customAttribu
 static Field makeField(const Entity &e, SymbolTable &st, const string &ns) {
     const Object &m = e.objectValue();
     string n = getStringField(e, m, "name");
+    validateSimpleName(n);
     vector<string> aliases;
     string aliasesName = "aliases";
     if (containsField(m, aliasesName)) {
@@ -396,7 +397,9 @@ static NodePtr makeEnumNode(const Entity &e,
         if (it.type() != json::EntityType::String) {
             throw Exception("Enum symbol not a string: {}", it.toString());
         }
-        symbols.add(it.stringValue());
+        string symbol = it.stringValue();
+        validateSimpleName(symbol);
+        symbols.add(symbol);
     }
  
     auto it = m.find("default");

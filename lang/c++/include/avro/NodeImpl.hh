@@ -325,6 +325,11 @@ public:
                const LeafNames &fieldsNames, std::vector<std::vector<std::string>> fieldsAliases,
                std::vector<GenericDatum> dv, const MultiAttributes &customAttributes);
 
+    void doAddName(const std::string &name) override {
+        validateSimpleName(name);
+        NodeImplRecord::doAddName(name);
+    }
+
     void swap(NodeRecord &r) {
         NodeImplRecord::swap(r);
         fieldsAliases_.swap(r.fieldsAliases_);
@@ -362,6 +367,11 @@ public:
                 throw Exception("Cannot add duplicate enum: {}", leafNameAttributes_.get(i));
             }
         }
+    }
+
+    void doAddName(const std::string &name) override {
+        validateSimpleName(name);
+        NodeImplEnum::doAddName(name);
     }
 
     void swap(NodeEnum &r) {

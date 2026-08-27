@@ -94,6 +94,7 @@ case "$target" in
       && ./build/DataFileTests   \
       && ./build/JsonTests \
       && ./build/LargeSchemaTests \
+      && ./build/NameValidationTests \
       && ./build/SchemaTests \
       && ./build/SpecificTests \
       && ./build/StreamTests)
